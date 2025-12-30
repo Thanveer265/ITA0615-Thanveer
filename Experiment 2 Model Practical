@@ -1,0 +1,19 @@
+import pandas as pd
+data = pd.DataFrame([
+    ["Some", "Small", "No", "Affordable", "Few", "Yes"],
+    ["Many", "Big", "No", "Expensive", "Many", "Yes"],
+    ["Many", "Medium", "No", "Expensive", "Few", "No"],
+    ["Many", "Small", "No", "Affordable", "Many", "Yes"]
+])
+attributes = data.iloc[:, :-1]
+labels = data.iloc[:, -1]
+hypothesis = ['0'] * len(attributes.columns)
+for i in range(len(labels)):
+    if labels[i] == "Yes":
+        for j in range(len(hypothesis)):
+            if hypothesis[j] == '0':
+                hypothesis[j] = attributes.iloc[i, j]
+            elif hypothesis[j] != attributes.iloc[i, j]:
+                hypothesis[j] = '?'
+print("Most Specific Hypothesis:")
+print(hypothesis)
